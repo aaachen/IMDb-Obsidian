@@ -1,0 +1,39 @@
+/** Foundation CSS: https://cdnjs.cloudflare.com/ajax/libs/foundation/6.0.1/css/foundation.css **/
+
+.callout {
+  /* padding: 1rem; */
+  /* border: 1px solid rgba(10, 10, 10, 0.25); */
+  /* border-radius: 0; */
+  position: relative;
+  background-color: white;
+}
+
+.close-button {
+  margin-top: 0.4em;
+  height: 1em;
+  width: 1em;
+  border: 2px solid blue;
+  padding: 0.2em;
+  position: absolute;
+  /* color: #8a8a8a; */
+  right: 0;
+  top: 0;
+  font-size: 1.5em;
+  line-height: 1;
+  cursor: pointer;
+}
+
+[data-whatinput='mouse'] .close-button {
+  outline: 0;
+}
+
+.close-button:hover,
+.close-button:focus {
+  color: #0a0a0a;
+}
+
+.header {
+  position: absolute;
+  left:0; 
+  top: 0;
+}
