@@ -1,42 +1,61 @@
 ---
-id: "{{id}}"
-description: "{{{description}}}"
-title: "{{{title}}}"
-imdbUrl: "{{{imdbUrl}}}"
 type: <%*
 function formatType() {
     let type = "{{{type}}}";
     if (type == "movie") {
 	   type = "Movies";
-    } else if (type == "videoGame") {
-       type = "Games";
+    } else if (type == "videogame") {
+       type = "Video Games";
     } else if (type == "tvSeries" || type == "tvMiniSeries") {
-	   type = "TV Series";
+	   type = "Series";
     }
     return `"[[${type}]]"`
 }
 tR += formatType();
 %>
+related: 
 poster: "{{{poster}}}"
+imdbId: "{{{id}}}"
 scoreImdb: {{imdbRating}}
 length: "{{runtimeMin}}"
-year: {{year}}
-releaseDate: {{{releaseDate}}}
-genre: "{{{genres}}}"
-votes: {{votes}}
-{{#directors.length}}
-director: {{{directors}}}
-{{/directors.length}}
-{{#writers.length}}
-writer: {{{writers}}}
-{{/writers.length}}
+genre:<%*
+function formatGenres() {
+    let input = "{{{genres}}}";
+    return input.split(",").map(i => `\n- "[[${i.trim()}]]"`).join("");
+}
+tR += formatGenres();
+%>
 {{#cast.length}}
 cast:<%*
 function formatCast() {
-    let cast = "{{{cast}}}";
-    return cast.split(",").map(c => `- "[[${c.trim()}]]"\n`).join("");
+    let input = "{{{cast}}}";
+    return input.split(",").map(i => `\n- "[[${i.trim()}]]"`).join("");
 }
-tR += "\n" + formatCast();
+tR += formatCast();
 %>
 {{/cast.length}}
+{{#directors.length}}
+director:<%*
+function formatDirectors() {
+    let input = "{{{directors}}}";
+    return input.split(",").map(i => `\n- "[[${i.trim()}]]"`).join("");
+}
+tR += formatDirectors();
+%>
+{{/directors.length}}
+{{#writers.length}}
+writer:<%*
+function formatWriters() {
+    let input = "{{{writers}}}";
+    return input.split(",").map(i => `\n- "[[${i.trim()}]]"`).join("");
+}
+tR += formatWriters();
+%>
+{{/writers.length}}
+plot: "{{{description}}}"
+year: {{year}}
+group:
+yearXP: 
+yearXPL: 
+rating: {{{yourRating}}}
 ---

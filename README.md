@@ -2,7 +2,7 @@
 
 IMDb Obsidian brings your IMDb data to Obsidian.
 
-TODO - demo.gif, image
+![](https://raw.githubusercontent.com/aaachen/IMDb-Obsidian/main/readme/plugin-view.png)
 
 ## Setup Instructions
 
@@ -14,7 +14,7 @@ data.
 At the time of writing, this can be configured under "Edit" > "Settings" at a
 given list page
 
-TODO - image
+![](https://raw.githubusercontent.com/aaachen/IMDb-Obsidian/main/readme/list-privacy.png)
 
 Then, copy the list url. This url is in the format of `https://www.imdb.com/list/ls502212336`
 
@@ -50,8 +50,8 @@ usage docs
 
 #### Example Templates
 
-- Basic Template (TODO: link)
-- Advance Template (TODO: link) using [Templater](https://github.com/SilentVoid13/Templater)
+- [Basic Template](https://raw.githubusercontent.com/aaachen/IMDb-Obsidian/main/readme/IMDB%20Plugin%20-%20Basic%20Template.md) 
+- [Advance Template](https://raw.githubusercontent.com/aaachen/IMDb-Obsidian/main/readme/IMDB%20Plugin%20-%20Advance%20Template.md) using [Templater](https://github.com/SilentVoid13/Templater)
 
 #### Variables available in the template
 
@@ -92,19 +92,22 @@ files, they'll be lost on the next sync.
 ## Output
 
 In the end it's completely up to you how you style your notes for your
-movie/show/games. One popular way is combining it with the `dataview plugin` and
-the new cards system in the `minimal theme`, which enables you to create
-beautiful little libraries like this:
+movie/show/games. I use dataview to setup mine as follows:
 
-TODO: image
+![](https://raw.githubusercontent.com/aaachen/IMDb-Obsidian/main/readme/my-imdb-setup.png)
 
-You can achieve this look here by adding `cssClasses: cards` to the frontmatter
-of the file you'd like to have your library in and then pasting this code here:
+Dataview script:
 
 ```dataview
-table without id ("![](" + cover +")") as Cover, author as Author
-where cover != null
-sort rating desc
+table without id
+	("![](" + poster + ")") as Poster, 
+	file.link as Title, 
+	year as Year, 
+	director as Director, 
+	"⭐ " + scoreImdb as "⭐ IMDB", 
+	rating, 
+	genre from "Entertainment"
+where type = [[Series]] and contains(genre, [[Animation]])
 ```
 
 Please check out the amazing work of these two
