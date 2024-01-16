@@ -1,5 +1,5 @@
 {
-  "id": "imdb-plugin",
+  "id": "imdb-sync",
   "name": "IMDb Obsidian",
   "version": "1.0.0",
   "minAppVersion": "0.12.0",

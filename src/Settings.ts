@@ -15,7 +15,7 @@ export class Settings extends PluginSettingTab {
     const { containerEl } = this
 
     containerEl.empty()
-    containerEl.createEl('h3', { text: 'IMDb List Sync' })
+    containerEl.createEl('h3', { text: 'IMDb list sync' })
     containerEl.createEl('p', {
       text:
         'Sync your favorite movies, shows, or games into your obsidian vault from IMDb. ' +
@@ -50,7 +50,7 @@ export class Settings extends PluginSettingTab {
 
     // set the title of the imdb items
     new Setting(containerEl)
-      .setName('File Name')
+      .setName('File name')
       .setDesc('For the IMDb items to be imported')
       .setTooltip("You don't need to add '.md' to the filename")
       .addText(text => {
@@ -63,7 +63,7 @@ export class Settings extends PluginSettingTab {
       })
 
     new Setting(containerEl)
-      .setName('File Template Path')
+      .setName('File template path')
       .setDesc('File template for creating the IMDb items')
       .addSearch(search => {
         new FileSuggest(this.app, search.inputEl)
@@ -90,7 +90,7 @@ export class Settings extends PluginSettingTab {
       })
 
     new Setting(containerEl)
-      .setName('Export Lists')
+      .setName('Export lists')
       .setDesc('Add IMDb list to export')
       .addButton(button =>
         button
@@ -126,7 +126,7 @@ export class Settings extends PluginSettingTab {
       })
 
       new Setting(containerEl)
-        .setName('List Name')
+        .setName('List name')
         .setDesc('Friendly name of your list')
         .addText(text => {
           text
@@ -138,7 +138,7 @@ export class Settings extends PluginSettingTab {
             })
         })
       new Setting(containerEl)
-        .setName('Target Folder')
+        .setName('Target folder')
         .setDesc(
           'If you leave this empty, the items will be created in the root directory.',
         )
@@ -153,7 +153,7 @@ export class Settings extends PluginSettingTab {
             })
         })
       new Setting(containerEl)
-        .setName('IMDb List URL')
+        .setName('IMDb list URL')
         .setDesc("List you'd like to export from")
         .addText(text => {
           text
