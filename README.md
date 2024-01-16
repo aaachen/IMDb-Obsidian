@@ -1,6 +1,6 @@
-# IMDb Obsidian
+# IMDb
 
-IMDb Obsidian brings your IMDb data to Obsidian.
+Bring your IMDb data to Obsidian.
 
 ![](https://raw.githubusercontent.com/aaachen/IMDb-Obsidian/main/readme/plugin-view.png)
 
@@ -72,7 +72,7 @@ usage docs
 - yourRating: Your rating on IMDb
 - poster: Poster link
 
-### Running IMDb Obsidian
+### Running the Plugin
 
 You can run the IMDb sync by executing the "IMDb Sync" command or by pressing
 the star ribbon in your menu bar.
