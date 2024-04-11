@@ -4,12 +4,12 @@ import { IMDbItem } from 'src/IMDbItem'
 const Mustache = require('mustache')
 
 export class MustacheContent {
-  constructor(
-    public currentBody: string,
-    public item: IMDbItem,
-  ) {}
+	constructor(
+		public currentBody: string,
+		public item: IMDbItem,
+	) {}
 
-  public getBody(): string {
-    return Mustache.render(this.currentBody, this.item)
-  }
+	public getBody(): string {
+		return Mustache.render(this.currentBody, this.item)
+	}
 }

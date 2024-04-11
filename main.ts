@@ -11,14 +11,14 @@ export default class IMDb extends Plugin {
     await this.loadSettings()
 
     // This creates an icon in the left ribbon.
-    this.addRibbonIcon('star', 'IMDb Sync', (evt: MouseEvent) => {
+    this.addRibbonIcon('star', 'Sync', (evt: MouseEvent) => {
       this.updateLibrary()
     })
 
     // This adds a simple command that can be triggered anywhere
     this.addCommand({
-      id: 'imdb-sync',
-      name: 'IMDb Sync',
+      id: 'sync',
+      name: 'Sync',
       callback: () => {
         this.updateLibrary()
       },

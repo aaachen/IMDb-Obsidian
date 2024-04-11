@@ -1,64 +1,82 @@
-// Credits go to Liam's Periodic Notes Plugin: https://github.com/liamcain/obsidian-periodic-notes
-
+import { AbstractInputSuggest, App } from 'obsidian'
 import { TAbstractFile, TFile, TFolder } from 'obsidian'
 
-import { TextInputSuggest } from './Suggest'
+export class FileSuggest extends AbstractInputSuggest<string> {
+	constructor(
+		private inputEl: HTMLInputElement,
+		private onSelectCb: (value: string) => void,
+		app: App,
+	) {
+		super(app, inputEl)
+	}
 
-export class FileSuggest extends TextInputSuggest<TFile> {
-  getSuggestions(inputStr: string): TFile[] {
-    const abstractFiles = this.app.vault.getAllLoadedFiles()
-    const files: TFile[] = []
-    const lowerCaseInputStr = inputStr.toLowerCase()
+	getSuggestions(inputStr: string): string[] {
+		const abstractFiles = this.app.vault.getAllLoadedFiles()
+		const files: string[] = []
+		const lowerCaseInputStr = inputStr.toLowerCase()
 
-    abstractFiles.forEach((file: TAbstractFile) => {
-      if (
-        file instanceof TFile &&
-        file.extension === 'md' &&
-        file.path.toLowerCase().contains(lowerCaseInputStr)
-      ) {
-        files.push(file)
-      }
-    })
+		abstractFiles.forEach((file: TAbstractFile) => {
+			if (
+				file instanceof TFile &&
+				file.extension === 'md' &&
+				file.path.toLowerCase().contains(lowerCaseInputStr)
+			) {
+				files.push(file.path)
+			}
+		})
 
-    return files
-  }
+		return files
+	}
 
-  renderSuggestion(file: TFile, el: HTMLElement): void {
-    el.setText(file.path)
-  }
+	renderSuggestion(filePath: string, el: HTMLElement): void {
+		el.setText(filePath)
+	}
 
-  selectSuggestion(file: TFile): void {
-    this.inputEl.value = file.path
-    this.inputEl.trigger('input')
-    this.close()
-  }
+	selectSuggestion(filePath: string, evt: MouseEvent | KeyboardEvent): void {
+		this.onSelectCb(filePath)
+		this.inputEl.value = filePath
+		this.inputEl.blur()
+		this.close()
+	}
 }
 
-export class FolderSuggest extends TextInputSuggest<TFolder> {
-  getSuggestions(inputStr: string): TFolder[] {
-    const abstractFiles = this.app.vault.getAllLoadedFiles()
-    const folders: TFolder[] = []
-    const lowerCaseInputStr = inputStr.toLowerCase()
+export class FolderSuggest extends AbstractInputSuggest<string> {
+	constructor(
+		private inputEl: HTMLInputElement,
+		private onSelectCb: (value: string) => void,
+		app: App,
+	) {
+		super(app, inputEl)
+	}
 
-    abstractFiles.forEach((folder: TAbstractFile) => {
-      if (
-        folder instanceof TFolder &&
-        folder.path.toLowerCase().contains(lowerCaseInputStr)
-      ) {
-        folders.push(folder)
-      }
-    })
+	getSuggestions(inputStr: string): string[] {
+		const abstractFiles = this.app.vault.getAllLoadedFiles()
+		const folders: string[] = []
+		const lowerCaseInputStr = inputStr.toLowerCase()
 
-    return folders
-  }
+		abstractFiles.forEach((folder: TAbstractFile) => {
+			if (
+				folder instanceof TFolder &&
+				folder.path.toLowerCase().contains(lowerCaseInputStr)
+			) {
+				folders.push(folder.path)
+			}
+		})
 
-  renderSuggestion(file: TFolder, el: HTMLElement): void {
-    el.setText(file.path)
-  }
+		return folders
+	}
 
-  selectSuggestion(file: TFolder): void {
-    this.inputEl.value = file.path
-    this.inputEl.trigger('input')
-    this.close()
-  }
+	renderSuggestion(folderPath: string, el: HTMLElement): void {
+		el.setText(folderPath)
+	}
+
+	selectSuggestion(
+		folderPath: string,
+		evt: MouseEvent | KeyboardEvent,
+	): void {
+		this.onSelectCb(folderPath)
+		this.inputEl.value = folderPath
+		this.inputEl.blur()
+		this.close()
+	}
 }
