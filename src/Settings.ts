@@ -79,6 +79,7 @@ export class Settings extends PluginSettingTab {
 					.setPlaceholder('')
 					.setValue(this.plugin.settings.fileTemplatePath)
 			})
+
 		new Setting(containerEl)
 			.setName('Overwrite')
 			.setDesc(
@@ -89,6 +90,20 @@ export class Settings extends PluginSettingTab {
 
 				toggle.onChange((newValue) => {
 					this.plugin.settings.overwrite = newValue
+					this.plugin.saveSettings()
+				})
+			})
+
+		new Setting(containerEl)
+			.setName('Sanitize File Name')
+			.setDesc(
+				'Automatically replace invalid characters in file name with \'_\'',
+			)
+			.addToggle((toggle) => {
+				toggle.setValue(this.plugin.settings.sanitizeFileName)
+
+				toggle.onChange((newValue) => {
+					this.plugin.settings.sanitizeFileName = newValue
 					this.plugin.saveSettings()
 				})
 			})

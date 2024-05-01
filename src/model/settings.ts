@@ -4,6 +4,7 @@ export interface IMDbSettings {
 	fileName: string
 	fileTemplatePath: string
 	overwrite: boolean
+	sanitizeFileName: boolean
 }
 
 export interface ExportSetting {
@@ -18,4 +19,5 @@ export const DEFAULT_SETTINGS: IMDbSettings = {
 	fileName: '{{{title}}}',
 	fileTemplatePath: '',
 	overwrite: false,
+	sanitizeFileName: false,
 }

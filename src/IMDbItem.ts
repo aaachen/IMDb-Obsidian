@@ -69,7 +69,12 @@ export class IMDbItem {
 	}
 
 	public async createFile(path: string): Promise<void> {
-		const fileName = this.getMustacheContent(this.plugin.settings.fileName)
+		let fileName = this.getMustacheContent(this.plugin.settings.fileName)
+
+		if (this.plugin.settings.sanitizeFileName) {
+			fileName = fileName.replace(/[<>:"\/\\|?*]/g, '_');
+		}
+
 		const fullName = `${path}${fileName}.md`
 
 		try {
