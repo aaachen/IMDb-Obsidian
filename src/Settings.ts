@@ -1,4 +1,4 @@
-import { App, PluginSettingTab, Setting } from 'obsidian'
+import { App, PluginSettingTab, Setting, Notice } from 'obsidian'
 import { FileSuggest, FolderSuggest } from './FileSuggest'
 import IMDb from '../main'
 
@@ -79,6 +79,7 @@ export class Settings extends PluginSettingTab {
 					.setPlaceholder('')
 					.setValue(this.plugin.settings.fileTemplatePath)
 			})
+
 		new Setting(containerEl)
 			.setName('Overwrite')
 			.setDesc(
@@ -90,6 +91,26 @@ export class Settings extends PluginSettingTab {
 				toggle.onChange((newValue) => {
 					this.plugin.settings.overwrite = newValue
 					this.plugin.saveSettings()
+				})
+			})
+
+		new Setting(containerEl)
+			.setName('Sanitize File Name')
+			.setDesc('Replace invalid file name characters with the following')
+			.setTooltip("Characters such as : \\ / will be replaced with this")
+			.addText((text) => {
+				text.setPlaceholder('-')
+				text.setValue(this.plugin.settings.sanitizeValue)
+				text.onChange(async (value) => {
+					if (/[<>:"\/\\|?*]/.test(value)) {
+						new Notice(
+							`⚠️ Sanitize value cannot contain any of the following: <>:"/\\|?*`,
+							5000,
+						)
+					} else {
+						this.plugin.settings.sanitizeValue = value
+						await this.plugin.saveSettings()
+					}
 				})
 			})
 
